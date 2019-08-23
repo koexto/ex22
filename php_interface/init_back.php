@@ -22,7 +22,7 @@ function noDeactiveElementProduction($arFields)
 		if ($count > 2)
 		{
 			global $APPLICATION;
-			$APPLICATION->throwException("Òîâàğ íåâîçìîæíî äåàêòèâèğîâàòü - ó íåãî $count ïğîñìîòğîâ.");
+			$APPLICATION->throwException("Ã’Ã®Ã¢Ã Ã° Ã­Ã¥Ã¢Ã®Ã§Ã¬Ã®Ã¦Ã­Ã® Ã¤Ã¥Ã ÃªÃ²Ã¨Ã¢Ã¨Ã°Ã®Ã¢Ã Ã²Ã¼ - Ã³ Ã­Ã¥Ã£Ã® $count Ã¯Ã°Ã®Ã±Ã¬Ã®Ã²Ã°Ã®Ã¢.");
 			return false;
 		}
 	}
@@ -36,10 +36,10 @@ function event404Log()
 {
 	if (http_response_code() === 404)
 	{
-		//ñòàğîå ÿäğî
+		//Ã±Ã²Ã Ã°Ã®Ã¥ Ã¿Ã¤Ã°Ã®
 		//global $APPLICATION;
 		//$url = $APPLICATION->GetCurUri();
-		//íîâîå
+		//Ã­Ã®Ã¢Ã®Ã¥
 		//$url = Application::getInstance()->getContext()->getRequest()->getDecodedUri();
 		$url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 		CEventLog::Add(array(
@@ -60,21 +60,21 @@ function changeMacroFeedbackForm(&$event, &$lid, &$arFields)
 	global $USER;
 	if ($USER->IsAuthorized())
 	{
-		$author = "Ïîëüçîâàòåëü àâòîğèçîâàí: {$USER->GetID()} {$USER->GetLogin()} {$USER->GetFullName()}, äàííûå èç ôîğìû: {$arFields["AUTHOR"]}";
+		$author = "ÃÃ®Ã«Ã¼Ã§Ã®Ã¢Ã Ã²Ã¥Ã«Ã¼ Ã Ã¢Ã²Ã®Ã°Ã¨Ã§Ã®Ã¢Ã Ã­: {$USER->GetID()} {$USER->GetLogin()} {$USER->GetFullName()}, Ã¤Ã Ã­Ã­Ã»Ã¥ Ã¨Ã§ Ã´Ã®Ã°Ã¬Ã»: {$arFields["AUTHOR"]}";
 	}
 	else
 	{
-		$author = "Ïîëüçîâàòåëü íå àâòîğèçîâàí, äàííûå èç ôîğìû: {$arFields["AUTHOR"]}";
+		$author = "ÃÃ®Ã«Ã¼Ã§Ã®Ã¢Ã Ã²Ã¥Ã«Ã¼ Ã­Ã¥ Ã Ã¢Ã²Ã®Ã°Ã¨Ã§Ã®Ã¢Ã Ã­, Ã¤Ã Ã­Ã­Ã»Ã¥ Ã¨Ã§ Ã´Ã®Ã°Ã¬Ã»: {$arFields["AUTHOR"]}";
 	}
 	$arFields["AUTHOR"] = $author;
 	CEventLog::Add(array(
 		"SEVERITY" => "INFO",
 		"AUDIT_TYPE_ID" => "FEEDBACK_FORM",
 		"MODULE_ID" => "main",
-		"DESCRIPTION" => "Çàìåíà äàííûõ â îòñûëàåìîì ïèñüìå – {$arFields["AUTHOR"]}",
+		"DESCRIPTION" => "Ã‡Ã Ã¬Ã¥Ã­Ã  Ã¤Ã Ã­Ã­Ã»Ãµ Ã¢ Ã®Ã²Ã±Ã»Ã«Ã Ã¥Ã¬Ã®Ã¬ Ã¯Ã¨Ã±Ã¼Ã¬Ã¥ â€“ {$arFields["AUTHOR"]}",
 	));
 
 	//$var = $USER->GetID();
-	$var = $event;
-	AddMessage2Log('var = ' . print_r($var, 1), "my_module_id");
+	//$var = $event;
+	//AddMessage2Log('var = ' . print_r($var, 1), "my_module_id");
 }
