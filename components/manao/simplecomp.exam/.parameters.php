@@ -2,13 +2,26 @@
 $arComponentParameters = array(
 	"GROUPS" => array(),
 	"PARAMETERS" => array(
-		"TEMPLATE_FOR_DATE" => array(
-			"PARENT" => "BASE",
-			"NAME" => "Шаблон для даты",
-			"TYPE" => "STRING",
-			"MULTIPLE" => "N",
-			"DEFAULT" => "Y-m-d",
-		),
+        "ID_IBLOCK_PRODUCTION" => array(
+            "PARENT" => "BASE",
+            "NAME" => GetMessage("T_SIMPLECOMP_ID_IBLOCK_PRODUCTION"),
+            "TYPE" => "STRING",
+            "DEFAULT" => "",
+        ),
+        "ID_IBLOCK_NEWS" => array(
+            "PARENT" => "BASE",
+            "NAME" => GetMessage("T_SIMPLECOMP_ID_IBLOCK_NEWS"),
+            "TYPE" => "STRING",
+            "DEFAULT" => "",
+        ),
+        "ID_PROPERTY_PRODUCTION" => array(
+            "PARENT" => "BASE",
+            "NAME" => GetMessage("T_SIMPLECOMP_PROPERTY_PRODUCTION"),
+            "TYPE" => "STRING",
+            "DEFAULT" => "",
+        ),
+        "SET_TITLE" => array(),
+        "CACHE_TIME" => array(),
 	),
 );
 ?>
