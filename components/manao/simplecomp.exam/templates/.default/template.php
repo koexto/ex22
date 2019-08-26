@@ -2,4 +2,22 @@
 echo "<pre>";
 print_r($arResult);
 echo "</pre>";
+
+echo "<h1>New</h1>";
+
+foreach ($arResult["NEWS"] as $key => $value)
+{
+	$sectionNames = implode(', ', $arResult["SECTION_NAMES"][$key]);
+	echo "<h2>{$value["NAME"]}</h2>";
+	echo "<p>{$value["ACTIVE_FROM"]}";
+	echo " ({$sectionNames})</p>";
+	echo "<ul>";
+	foreach ($value["SECTION_IDS"] as $idSection) {
+		foreach ($arResult["PRODUCTION"][$idSection] as $key2 => $value2) {
+			echo "<li>{$value2["NAME"]} - {$value2["PRICE"]} - {$value2["MATERIAL"]} - {$value2["ARTNUMBER"]}</li>";
+		}
+	}
+	echo "</ul>";
+}
+
 ?>
