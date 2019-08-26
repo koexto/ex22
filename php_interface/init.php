@@ -8,7 +8,6 @@ function noDeactiveElementProduction($arFields)
 {
 	if ($arFields["IBLOCK_ID"] === 2 && $arFields["ACTIVE"] === "N")
 	{
-
 		$arFilter = array(
 			'IBLOCK_ID' => $arFields["IBLOCK_ID"],
 			'ID' => $arFields["ID"],
