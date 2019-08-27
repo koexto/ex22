@@ -1,7 +1,39 @@
 <?
 // логирование/отладка
-//define("LOG_FILENAME", $_SERVER["DOCUMENT_ROOT"]."/log.txt");
+define("LOG_FILENAME", $_SERVER["DOCUMENT_ROOT"]."/log.txt");
 //AddMessage2Log('var = ' . print_r($var, 1), "my_module_id");
+
+use Bitrix\Main\Localization\Loc;
+Loc::loadMessages(__FILE__);
+//include(GetLangFileName(dirname(__FILE__)."/lang/", "/init.php"));
+
+//AddMessage2Log('var = ' . print_r($MESS, 1), "my_module_id");
+/*
+* Вопросы:
+*	- Двойные/одинарные кавычки
+*	- array() или []
+*/
+
+
+AddEventHandler("main", "OnAdminTabControlBegin", ["AdvTab", "removeAdvTab"]);
+
+class AdvTab
+{
+	const FORM_NAME = "form_element_5";
+	const DIV_TAB = "seo_adv_seo_adv";
+
+	function removeAdvTab(&$form)
+	{
+		if ($form->name == self::FORM_NAME)
+		{
+			foreach ($form->tabs as &$value)
+			{
+				if ($value["DIV"] == self::DIV_TAB)
+					$value = [];
+			}
+		}
+	}
+}
 
 AddEventHandler("iblock", "OnBeforeIBlockElementUpdate", "noDeactiveElementProduction");
 
@@ -23,7 +55,7 @@ function noDeactiveElementProduction($arFields)
 		if ($count > 2)
 		{
 			global $APPLICATION;
-			$APPLICATION->throwException("Товар невозможно деактивировать - у него $count просмотров.");
+			$APPLICATION->throwException(Loc::GetMessage("INIT_IMPOSSIBILITY_DEACTIVATE", ["#count#" => $count]));
 			return false;
 		}
 	}
