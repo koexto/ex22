@@ -34,6 +34,16 @@ $APPLICATION->IncludeComponent("bitrix:menu", "bottom", array(
 	false
 );
 ?>
+<?$APPLICATION->IncludeComponent(
+	"manao:seotool.exam", 
+	"", 
+	array(
+		"CACHE_TYPE" => "A",
+		"CACHE_TIME" => "36000000",
+	),
+	false
+);
+?>
 		</div>
 		<div id="footer-design"><?=GetMessage("FOOTER_DISIGN")?></div>
 	</div>

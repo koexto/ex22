@@ -1,6 +1,7 @@
 <?
 // логирование/отладка
-define("LOG_FILENAME", $_SERVER["DOCUMENT_ROOT"]."/log.txt");
+//define("LOG_FILENAME", $_SERVER["DOCUMENT_ROOT"]."/log.txt");
+//AddMessage2Log('var = ' . print_r($var, 1), "my_module_id");
 
 AddEventHandler("iblock", "OnBeforeIBlockElementUpdate", "noDeactiveElementProduction");
 
@@ -113,7 +114,7 @@ class KoeAdminMenu
 	
 }
 
-AddEventHandler("main", "OnPageStart", array("KoeSeoTool", "changeSeoTags"));
+/*AddEventHandler("main", "OnPageStart", array("KoeSeoTool", "changeSeoTags"));
 
 class KoeSeoTool
 {
@@ -142,5 +143,5 @@ class KoeSeoTool
 		AddMessage2Log('var = ' . print_r($var, 1), "my_module_id");
 
 	}
-}
+}*/
 
