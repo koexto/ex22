@@ -67,12 +67,8 @@ AddEventHandler("main", "OnAfterEpilog", "event404Log");
 
 function event404Log()
 {
-	if (http_response_code() === 404)
+    if (defined("ERROR_404") && ERROR_404 == "Y")
 	{
-        //define("ERROR_404", "Y");
-        AddMessage2Log('var = ' . print_r(ERROR_404, 1), "my_module_id");
-
-
 		//старое ядро
 		//global $APPLICATION;
 		//$url = $APPLICATION->GetCurUri();
