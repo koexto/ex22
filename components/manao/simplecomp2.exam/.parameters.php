@@ -4,19 +4,25 @@ $arComponentParameters = array(
 	"PARAMETERS" => array(
         "ID_IBLOCK_PRODUCTION" => array(
             "PARENT" => "BASE",
-            "NAME" => GetMessage("T_SIMPLECOMP_ID_IBLOCK_PRODUCTION"),
+            "NAME" => GetMessage("T_SIMPLECOMP2_ID_IBLOCK_PRODUCTION"),
             "TYPE" => "STRING",
             "DEFAULT" => "",
         ),
-        "ID_IBLOCK_NEWS" => array(
+        "ID_IBLOCK_FIRM" => array(
             "PARENT" => "BASE",
-            "NAME" => GetMessage("T_SIMPLECOMP_ID_IBLOCK_NEWS"),
+            "NAME" => GetMessage("T_SIMPLECOMP2_ID_IBLOCK_FIRM"),
             "TYPE" => "STRING",
             "DEFAULT" => "",
         ),
-        "ID_PROPERTY_PRODUCTION" => array(
+        "PRODUCTION_PROPERTY_FIRM" => array(
             "PARENT" => "BASE",
-            "NAME" => GetMessage("T_SIMPLECOMP_PROPERTY_PRODUCTION"),
+            "NAME" => GetMessage("T_SIMPLECOMP2_PRODUCTION_PROPERTY_FIRM"),
+            "TYPE" => "STRING",
+            "DEFAULT" => "",
+        ),
+        "URL_DETAIL" => array(
+            "PARENT" => "BASE",
+            "NAME" => GetMessage("T_SIMPLECOMP2_URL_DETAIL"),
             "TYPE" => "STRING",
             "DEFAULT" => "",
         ),

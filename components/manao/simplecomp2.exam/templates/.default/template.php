@@ -1,23 +1,14 @@
 <? if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
-echo "<pre>";
-print_r($arResult);
-echo "</pre>";
 
-echo "<h1>New</h1>";
+//echo "<pre>" . print_r($arResult, 1) . "</pre>";
 
-foreach ($arResult["NEWS"] as $key => $value)
+foreach ($arResult["PRODUCTION"] as $key=>$production)
 {
-	$sectionNames = implode(', ', $arResult["SECTION_NAMES"][$key]);
-	echo "<h2>{$value["NAME"]}</h2>";
-	echo "<p>{$value["ACTIVE_FROM"]}";
-	echo " ({$sectionNames})</p>";
-	echo "<ul>";
-	foreach ($value["SECTION_IDS"] as $idSection) {
-		foreach ($arResult["PRODUCTION"][$idSection] as $key2 => $value2) {
-			echo "<li>{$value2["NAME"]} - {$value2["PRICE"]} - {$value2["MATERIAL"]} - {$value2["ARTNUMBER"]}</li>";
-		}
+	echo "<h2>{$key}</h2><ul>";
+	foreach ($production as $product)
+	{
+		echo "<li>{$product["NAME"]} - {$product["PRICE"]} - {$product["MATERIAL"]} - {$product["ARTNUMBER"]}</li>";
 	}
 	echo "</ul>";
 }
-
 ?>
