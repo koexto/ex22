@@ -69,6 +69,10 @@ function event404Log()
 {
 	if (http_response_code() === 404)
 	{
+        //define("ERROR_404", "Y");
+        AddMessage2Log('var = ' . print_r(ERROR_404, 1), "my_module_id");
+
+
 		//старое ядро
 		//global $APPLICATION;
 		//$url = $APPLICATION->GetCurUri();
