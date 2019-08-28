@@ -1,9 +1,6 @@
 <?
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 
-define("LOG_FILENAME", $_SERVER["DOCUMENT_ROOT"]."/log.txt");
-
-
 CModule::IncludeModule("iblock");
 
 $dbIBlockType = CIBlockType::GetList(
@@ -30,19 +27,10 @@ $arTemplateParameters = array(
 		"VALUES" => $arIblockType,
 		"REFRESH" => "Y",
 	),
-	"ID_FOR_CANONICAL" => Array(
-		"NAME" => GetMessage("T_IBLOCK_DESC_IBLOCK_FOR_CANONICAL"),
-		"TYPE" => "LIST",
-		"DEFAULT" => "",
-		"VALUES" => $arIblock,
-	),
 );
-
-AddMessage2Log('var = ' . print_r($arCurrentValues["TYPE_IBLOCK_FOR_CANONICAL"], 1), "my_module_id");
 
 if ($arCurrentValues['TYPE_IBLOCK_FOR_CANONICAL'] != "")
 {
-	AddMessage2Log('var = ' . print_r($arCurrentValues["TYPE_IBLOCK_FOR_CANONICAL"], 1), "my_module_id");
 	$res = CIBlock::GetList(
 		array(),
 		array(
