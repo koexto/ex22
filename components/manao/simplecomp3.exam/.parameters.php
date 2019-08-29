@@ -2,19 +2,19 @@
 $arComponentParameters = array(
 	"GROUPS" => array(),
 	"PARAMETERS" => array(
-        "ID_IBLOCK_PRODUCTION" => array(
+        "ID_IBLOCK_NEWS" => array(
             "PARENT" => "BASE",
             "NAME" => GetMessage("T_SIMPLECOMP3_ID_IBLOCK_NEWS"),
             "TYPE" => "STRING",
             "DEFAULT" => "",
         ),
-        "ID_IBLOCK_FIRM" => array(
+        "CODE_PROPERTY_AUTHOR" => array(
             "PARENT" => "BASE",
             "NAME" => GetMessage("T_SIMPLECOMP3_PROPERTY_AUTHOR"),
             "TYPE" => "STRING",
             "DEFAULT" => "",
         ),
-        "PRODUCTION_PROPERTY_FIRM" => array(
+        "USER_PROPERTY_AUTHOR" => array(
             "PARENT" => "BASE",
             "NAME" => GetMessage("T_SIMPLECOMP3_USER_PROPERTY_AUTHOR"),
             "TYPE" => "STRING",
