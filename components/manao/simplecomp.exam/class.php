@@ -17,7 +17,6 @@ class SimpleComp extends CBitrixComponent
 			$arResult["NEWS"][$elementNews["ID"]] = ["NAME" => $elementNews["NAME"], "ACTIVE_FROM" => $elementNews["ACTIVE_FROM"]];
 		}
 
-
 		$arFilterSection = array(
 			'IBLOCK_ID' => $arParams["ID_IBLOCK_PRODUCTION"],
 			'ACTIVE' => 'Y',
@@ -27,7 +26,6 @@ class SimpleComp extends CBitrixComponent
 
 		while ($section = $sections->fetch())
 		{	
-			//print_r($section["UF_NEWS_LINK"]);
 			foreach ($section["UF_NEWS_LINK"] as $value) {
 				$arResult["NEWS"][$value]["SECTION_IDS"][] = $section["ID"];
 
@@ -36,16 +34,13 @@ class SimpleComp extends CBitrixComponent
 			}
 		}
 
-
 		$arFilter = array(
 			'IBLOCK_ID' => $arParams["ID_IBLOCK_PRODUCTION"],
 			'ACTIVE' => 'Y',
 		);
 		$arSelect = array("ID", "NAME", "IBLOCK_SECTION_ID", "PROPERTY_PRICE", "PROPERTY_ARTNUMBER", "PROPERTY_MATERIAL");
-
 		$elements = CIBlockElement::GetList(array(), $arFilter, false, false, $arSelect);
-		$arResult["CNT"] = CIBlockElement::GetList(false, $arFilter, array('ID_IBLOCK_PRODUCTION'))->Fetch();
-
+		$arResult["CNT"] = $elements->SelectedRowsCount();
 
 		while ($element = $elements->fetch())
 		{
@@ -56,9 +51,7 @@ class SimpleComp extends CBitrixComponent
 				"MATERIAL" => $element["PROPERTY_MATERIAL_VALUE"],
 			];
 		}
-
 		return $arResult;
-
 	}
 }
 ?>

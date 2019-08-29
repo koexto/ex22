@@ -7,7 +7,8 @@ foreach ($arResult["PRODUCTION"] as $key=>$production)
 	echo "<h2>{$key}</h2><ul>";
 	foreach ($production as $product)
 	{
-		echo "<li>{$product["NAME"]} - {$product["PRICE"]} - {$product["MATERIAL"]} - {$product["ARTNUMBER"]}</li>";
+		$link = '<a href="http://' . $product["DETAIL_PAGE_URL"] . '">' . $product["NAME"] . '</a>';
+		echo "<li>{$link} - {$product["PRICE"]} - {$product["MATERIAL"]} - {$product["ARTNUMBER"]}</li>";
 	}
 	echo "</ul>";
 }

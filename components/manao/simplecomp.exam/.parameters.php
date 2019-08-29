@@ -20,7 +20,6 @@ $arComponentParameters = array(
             "TYPE" => "STRING",
             "DEFAULT" => "",
         ),
-        "SET_TITLE" => array(),
         "CACHE_TIME" => array(),
 	),
 );
