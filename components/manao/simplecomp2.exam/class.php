@@ -8,8 +8,8 @@ class SimpleComp2 extends CBitrixComponent
 
 	function getResult()
 	{
-		$arResult["get"] = $_GET;
-		return $arResult;
+		//$arResult["get"] = $_GET;
+		//return $arResult;
 
 		$res = CIBlock::GetByID($this->arParams["ID_IBLOCK_PRODUCTION"])->fetch();
 		if ($res)
@@ -79,11 +79,21 @@ class SimpleComp2 extends CBitrixComponent
 			"SORT" => "ASC",
 		);
 		$arFilter = array(
-			'IBLOCK_ID' => $this->arParams["ID_IBLOCK_PRODUCTION"],
-			'ACTIVE' => 'Y',
-			'!PROPERTY_FIRM' => false,
-			'CHECK_PERMISSIONS' => 'Y',
+			"IBLOCK_ID" => $this->arParams["ID_IBLOCK_PRODUCTION"],
+			"ACTIVE" => "Y",
+			"!PROPERTY_FIRM" => false,
+			"CHECK_PERMISSIONS" => "Y",
+
 		);
+		if (isset($_GET["F"]))
+		{
+			$arFilter[] = array(
+				"LOGIC" => "OR",
+				array("<=PROPERTY_PRICE" => 1700, "PROPERTY_MATERIAL" => "Дерево, ткань"),
+				array("<PROPERTY_PRICE" => 1500, "PROPERTY_MATERIAL" => "Металл, пластик"),
+			);
+		}
+
 		return CIBlockElement::GetList($arOrder, $arFilter, false, false, $arSelect);
 	}
 }

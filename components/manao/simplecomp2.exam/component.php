@@ -3,16 +3,19 @@
 if (!CModule::IncludeModule("iblock"))
 	return;
 
-
-
-//if ($this->StartResultCache(false, $USER->GetGroups()))
-
+if (isset($_GET["F"]))
+{
 	$arResult = $this->getResult();
-	//$arResult["get"] = $_GET;
-
-
 	$this->IncludeComponentTemplate();
+	$APPLICATION->SetTitle("Разделов: {$arResult["COUNT"]}");
+	return;
+}
 
+if ($this->StartResultCache(false, $USER->GetGroups()))
+{
+	$arResult = $this->getResult();
+	$this->IncludeComponentTemplate();
+}
 
 $APPLICATION->SetTitle("Разделов: {$arResult["COUNT"]}");
 ?>
