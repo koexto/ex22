@@ -3,11 +3,14 @@
 
 class SimpleComp2 extends CBitrixComponent
 {
-	private $arSelect = array("ID", "IBLOCK_ID", "NAME", "DETAIL_PAGE_URL", "PROPERTY_PRICE", "PROPERTY_ARTNUMBER",
+	private $arSelect = array("ID", "IBLOCK_ID", "NAME", "CODE", "DETAIL_PAGE_URL", "PROPERTY_PRICE", "PROPERTY_ARTNUMBER",
 		"PROPERTY_MATERIAL", "PROPERTY_FIRM");
 
 	function getResult()
 	{
+		$arResult["get"] = $_GET;
+		return $arResult;
+
 		$res = CIBlock::GetByID($this->arParams["ID_IBLOCK_PRODUCTION"])->fetch();
 		if ($res)
 			$iblockVersion = $res["VERSION"];
@@ -71,13 +74,17 @@ class SimpleComp2 extends CBitrixComponent
 
 	private function getProduction($arSelect)
 	{
+		$arOrder = array(
+			"NAME" => "ASC",
+			"SORT" => "ASC",
+		);
 		$arFilter = array(
 			'IBLOCK_ID' => $this->arParams["ID_IBLOCK_PRODUCTION"],
 			'ACTIVE' => 'Y',
 			'!PROPERTY_FIRM' => false,
 			'CHECK_PERMISSIONS' => 'Y',
 		);
-		return CIBlockElement::GetList(array(), $arFilter, false, false, $arSelect);
+		return CIBlockElement::GetList($arOrder, $arFilter, false, false, $arSelect);
 	}
 }
 

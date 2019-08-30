@@ -1,6 +1,6 @@
 <? if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 
-//echo "<pre>" . print_r($arResult, 1) . "</pre>";
+echo "<pre>" . print_r($arResult, 1) . "</pre>";
 
 foreach ($arResult["PRODUCTION"] as $key=>$production)
 {
@@ -8,7 +8,7 @@ foreach ($arResult["PRODUCTION"] as $key=>$production)
 	foreach ($production as $product)
 	{
 		$link = '<a href="http://' . $product["DETAIL_PAGE_URL"] . '">' . $product["NAME"] . '</a>';
-		echo "<li>{$link} - {$product["PRICE"]} - {$product["MATERIAL"]} - {$product["ARTNUMBER"]}</li>";
+		echo "<li>{$link} - {$product["PRICE"]} - {$product["MATERIAL"]} - {$product["ARTNUMBER"]} ({$product["DETAIL_PAGE_URL"]})</li>";
 	}
 	echo "</ul>";
 }
