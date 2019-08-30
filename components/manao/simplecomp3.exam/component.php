@@ -3,12 +3,11 @@
 if (!CModule::IncludeModule("iblock"))
 	return;
 
-//if ($this->StartResultCache(false, $USER->GetGroups()))
-
+if ($this->StartResultCache(false, $USER->GetID()))
+{
 	$arResult = $this->getResult();
-
 	$this->IncludeComponentTemplate();
+}
 
-
-$APPLICATION->SetTitle("Разделов: {$arResult["COUNT"]}");
+$APPLICATION->SetTitle("Новостей: {$arResult["NEWS"]["COUNT"]}");
 ?>
