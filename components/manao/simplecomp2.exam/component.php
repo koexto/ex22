@@ -15,6 +15,7 @@ $this->AddIncludeAreaIcon(
 	)
 );
 
+
 if (isset($_GET["F"]))
 {
 	$arResult = $this->getResult();

@@ -26,11 +26,36 @@ class SimpleComp2 extends CBitrixComponent
 		$production = $this->getProduction($arSelect);
 		$production->SetUrlTemplates($this->arParams["URL_DETAIL"]);
 
-		while ($product = $production->GetNext())
+		while ($product = $production->GetNext()){
 			$arResult["PRODUCTION"][$product["PROPERTY_FIRM_NAME"]][] = $this->getArrayProduct($product);
+			$arResult["MIN"] = $this->isMin($product["PROPERTY_PRICE_VALUE"], $arResult["MIN"]);
+			$arResult["MAX"] = $this->isMax($product["PROPERTY_PRICE_VALUE"], $arResult["MAX"]);
+		}
 
 		$arResult["COUNT"] = count($arResult["PRODUCTION"]);
 		return $arResult;
+	}
+
+	private function isMax($price, $max)
+	{
+		if ($max === NULL)
+			return $price;
+
+		if ($price > $max)
+			return $price;
+
+		return $max;
+	}
+
+	private function isMin($price, $min)
+	{
+		if ($min === NULL)
+			return $price;
+
+		if ($price < $min)
+			return $price;
+
+		return $min;
 	}
 
 	private function getFromIblock2()
@@ -51,8 +76,11 @@ class SimpleComp2 extends CBitrixComponent
 		$production->SetUrlTemplates($this->arParams["URL_DETAIL"]);
 
 		while ($product = $production->GetNext()) {
-			foreach ($product["PROPERTY_FIRM_VALUE"] as $keyFirm)
+			foreach ($product["PROPERTY_FIRM_VALUE"] as $keyFirm) {
 				$arResult["PRODUCTION"][$arFirm[$keyFirm]][] = $this->getArrayProduct($product);
+				$arResult["MIN"] = $this->isMin($product["PROPERTY_PRICE_VALUE"], $arResult["MIN"]);
+				$arResult["MAX"] = $this->isMax($product["PROPERTY_PRICE_VALUE"], $arResult["MAX"]);
+			}
 		}
 		$arResult["COUNT"] = count($arResult["PRODUCTION"]);
 		return $arResult;

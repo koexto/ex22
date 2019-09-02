@@ -1,6 +1,7 @@
 <? if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 
 echo "<pre>" . print_r($arResult, 1) . "</pre>";
+var_dump($arResult["MIN"]);
 
 echo 'фильтр: <a href="?F=ugu">ex2/simplecomp2/?F=ugu</a>';
 
@@ -23,3 +24,10 @@ foreach ($arResult["PRODUCTION"] as $key=>$production)
 	echo "</ul>";
 }
 ?>
+
+<? $this->SetViewTarget('smart-filter');?>
+<div style="color:red; margin: 34px 15px 35px 15px">
+    <p>Макс. цен - <?=$arResult["MAX"]?></p>
+	<p>Мин. цен - <?=$arResult["MIN"]?></p>
+</div>
+<? $this->EndViewTarget();?>
