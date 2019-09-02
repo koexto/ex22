@@ -8,9 +8,6 @@ class SimpleComp2 extends CBitrixComponent
 
 	function getResult()
 	{
-		//$arResult["get"] = $_GET;
-		//return $arResult;
-
 		$res = CIBlock::GetByID($this->arParams["ID_IBLOCK_PRODUCTION"])->fetch();
 		if ($res)
 			$iblockVersion = $res["VERSION"];
@@ -63,12 +60,24 @@ class SimpleComp2 extends CBitrixComponent
 
 	private function  getArrayProduct($product)
 	{
+		$arButtons = CIBlock::GetPanelButtons(
+			$product["IBLOCK_ID"],
+			$product["ID"],
+			0,
+			array("SECTION_BUTTONS"=>false, "SESSID"=>false)
+		);
+
 		return [
+			"ADD_LINK" => $arButtons["edit"]["add_element"]["ACTION_URL"],
+			"EDIT_LINK" => $arButtons["edit"]["edit_element"]["ACTION_URL"],
+			"DELETE_LINK" => $arButtons["edit"]["delete_element"]["ACTION_URL"],
 			"NAME" => $product["NAME"],
 			"PRICE" => $product["PROPERTY_PRICE_VALUE"],
 			"MATERIAL" => $product["PROPERTY_MATERIAL_VALUE"],
 			"ARTNUMBER" => $product["PROPERTY_ARTNUMBER_VALUE"],
 			"DETAIL_PAGE_URL" => $product["DETAIL_PAGE_URL"],
+			"ID" => $product["ID"],
+			"IBLOCK_ID" => $product["IBLOCK_ID"],
 		];
 	}
 
