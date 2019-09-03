@@ -4,25 +4,32 @@
 
 echo 'фильтр: <a href="?F=ugu">ex2/simplecomp2/?F=ugu</a>';
 
-foreach ($arResult["PRODUCTION"] as $key=>$production)
-{
-	echo "<h2>{$key}</h2><ul>";
-	foreach ($production as $product)
-	{
-		$this->AddEditAction($product['ID'] . $key, $product['ADD_LINK'], CIBlock::GetArrayByID($product["IBLOCK_ID"], "ELEMENT_ADD"),
-			Array("ICON" => "bx-context-toolbar-create-icon",));
-		$this->AddEditAction($product['ID'] . $key, $product['EDIT_LINK'], CIBlock::GetArrayByID($product["IBLOCK_ID"], "ELEMENT_EDIT"));
-		$this->AddDeleteAction($product['ID'] . $key, $product['DELETE_LINK'], CIBlock::GetArrayByID($product["IBLOCK_ID"],
-			"ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
+$items = $arResult["ITEMS"];
 
-		$link = '<a href="http://' . $product["DETAIL_PAGE_URL"] . '">' . $product["NAME"] . '</a>';
-		echo "<li id='". $this->GetEditAreaID($product['ID'] . $key) ."'>" . " {$link} - {$product["PRICE"]} - 
-			{$product["MATERIAL"]} - {$product["ARTNUMBER"]} ({$product["DETAIL_PAGE_URL"]})</li>";
-	}
-	unset($product);
-	echo "</ul>";
+for ($i = 0; $i < count($items); $i++)
+{
+    if ($items[$i]["PROPERTY_FIRM_NAME"] !== $items[$i-1]["PROPERTY_FIRM_NAME"])
+        echo "<h2>{$items[$i]["PROPERTY_FIRM_NAME"]}</h2>";
+
+
+    $this->AddEditAction($items[$i]['ID'] . $items[$i]["PROPERTY_FIRM_NAME"], $items[$i]['ADD_LINK'],
+        CIBlock::GetArrayByID($items[$i]["IBLOCK_ID"], "ELEMENT_ADD"),
+        Array("ICON" => "bx-context-toolbar-create-icon",));
+	$this->AddEditAction($items[$i]['ID'] . $items[$i]["PROPERTY_FIRM_NAME"], $items[$i]['EDIT_LINK'],
+        CIBlock::GetArrayByID($items[$i]["IBLOCK_ID"], "ELEMENT_EDIT"));
+	$this->AddDeleteAction($items[$i]['ID'] . $items[$i]["PROPERTY_FIRM_NAME"], $items[$i]['DELETE_LINK'],
+        CIBlock::GetArrayByID($items[$i]["IBLOCK_ID"],"ELEMENT_DELETE"),
+        array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
+
+	$link = '<a href="http://' . $items[$i]["DETAIL_PAGE_URL"] . '">' . $items[$i]["NAME"] . '</a>';
+	echo "<li id='". $this->GetEditAreaID($items[$i]['ID'] . $items[$i]["PROPERTY_FIRM_NAME"]) ."'>" . " {$link} - {$items[$i]["PRICE"]} - 
+			{$items[$i]["MATERIAL"]} - {$items[$i]["ARTNUMBER"]} ({$items[$i]["DETAIL_PAGE_URL"]})</li>";
 }
 ?>
+
+<div style="margin: 34px 15px 35px 15px">
+	<?= $arResult["NAV_STRING"] ?>
+</div>
 
 <? $this->SetViewTarget('smart-filter');?>
 <div style="color:red; margin: 34px 15px 35px 15px">

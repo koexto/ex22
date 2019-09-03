@@ -8,12 +8,13 @@ $this->AddIncludeAreaIcon(
 	array(
 		"ID" => "IB_admin",
 		"TITLE" => "ИБ в админке",
-		"URL" => "http://" . SITE_SERVER_NAME . "/bitrix/admin/iblock_element_admin.php?IBLOCK_ID=" . $arParams["ID_IBLOCK_PRODUCTION"] .
-				"&type=products&lang=ru&find_el_y=Y&clear_filter=Y&apply_filter=Y", //или javascript:MyJSFunction ()
+		"URL" => "http://" . SITE_SERVER_NAME . "/bitrix/admin/iblock_element_admin.php?IBLOCK_ID=" .
+			$arParams["ID_IBLOCK_PRODUCTION"] .	"&type=products&lang=ru&find_el_y=Y&clear_filter=Y&apply_filter=Y",
 		"IN_PARAMS_MENU" => true, //показать в контекстном меню
 		//"IN_MENU" => true //показать в подменю компонента
 	)
 );
+
 
 
 if (isset($_GET["F"]))
@@ -24,11 +25,11 @@ if (isset($_GET["F"]))
 	return;
 }
 
-if ($this->StartResultCache(false, $USER->GetGroups()))
+if ($this->StartResultCache(false, $USER->GetGroups() . $_GET["PAGEN_1"]))
 {
 	$arResult = $this->getResult();
 	$this->IncludeComponentTemplate();
 }
 
-$APPLICATION->SetTitle("Разделов: {$arResult["COUNT"]}");
+$APPLICATION->SetTitle("Разделов: {$arResult["FIRMS"]}");
 ?>
