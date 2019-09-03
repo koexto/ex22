@@ -9,6 +9,9 @@ class SimpleComp2 extends CBitrixComponent
 		$production->SetUrlTemplates($this->arParams["URL_DETAIL"]);
 		//$arResult["COUNT"] = $production->SelectedRowsCount();
 
+		//$arResult["NAV_STRING"] = $production->GetPageNavString("Элементы", "", true);
+
+
 		while ($product = $production->GetNext()){
 			$arResult["ITEMS"][] = $this->getArrayProduct($product);
 			$firms[$product["PROPERTY_".$this->arParams["PRODUCTION_PROPERTY_FIRM"]."_NAME"]] = 1;
@@ -18,12 +21,11 @@ class SimpleComp2 extends CBitrixComponent
 		$arResult["FIRMS"] = count($firms);
 
 		usort($arResult["ITEMS"], [$this, "compareString"]);
-
 		$arPagination = $this->pagination($arResult["ITEMS"]);
-
 		return array_merge($arResult, $arPagination);
 	}
 
+	//постраничка из массива
 	private function pagination($items)
 	{
 
@@ -34,7 +36,7 @@ class SimpleComp2 extends CBitrixComponent
 		$arResult["PAGE_START"] = $rs_ObjectList->SelectedRowsCount() - ($rs_ObjectList->NavPageNomer - 1) * $rs_ObjectList->NavPageSize;
 		while($ar_Field = $rs_ObjectList->Fetch())
 		{
-			$arResult['ITEMS'][] = $ar_Field;
+			$arResult["ITEMS"][] = $ar_Field;
 		}
 		return $arResult;
 	}
@@ -78,6 +80,7 @@ class SimpleComp2 extends CBitrixComponent
 					"PROPERTY_".$this->arParams["PRODUCTION_PROPERTY_FIRM"].".NAME");
 
 		$arOrder = array(
+			//"PROPERTY_".$this->arParams["PRODUCTION_PROPERTY_FIRM"].".NAME" => "ASC",
 			"NAME" => "ASC",
 			"SORT" => "ASC",
 		);
@@ -88,6 +91,12 @@ class SimpleComp2 extends CBitrixComponent
 			"CHECK_PERMISSIONS" => "Y",
 
 		);
+		$arNavParams = array(
+			"nPageSize" => 2,   // количество элементов на странице
+			"bShowAll" => true, // показывать ссылку «Все элементы»?
+		);
+		$arNavParams = false;
+
 		if (isset($_GET["F"]))
 		{
 			$arFilter[] = array(
@@ -97,7 +106,7 @@ class SimpleComp2 extends CBitrixComponent
 			);
 		}
 
-		return CIBlockElement::GetList($arOrder, $arFilter, false, false, $arSelect);
+		return CIBlockElement::GetList($arOrder, $arFilter, false, $arNavParams, $arSelect);
 	}
 
 	private function isMax($price, $max)
