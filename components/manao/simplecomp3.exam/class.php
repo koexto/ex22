@@ -83,7 +83,7 @@ class SimpleComp3 extends CBitrixComponent
 		}
 	}
 
-	//для инфоблоков тип 1 простая выборка
+	//для инфоблоков тип 1 простая выборка. Не используется
 	private function getNews2($authors)
 	{
 		$arFilter = [
