@@ -1,6 +1,7 @@
 <? if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 
 //echo "<pre>" . print_r($arResult, 1) . "</pre>";
+echo "<pre>" . print_r(time(), 1) . "</pre>";
 
 echo 'фильтр: <a href="?F=ugu">ex2/simplecomp2/?F=ugu</a>';
 
