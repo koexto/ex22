@@ -26,9 +26,9 @@ $arComponentParameters = array(
             "TYPE" => "STRING",
             "DEFAULT" => "",
         ),
-		"ELEMENTS_OF_PAGE" => array(
+		"ELEMENTS_ON_PAGE" => array(
 			"PARENT" => "BASE",
-			"NAME" => GetMessage("T_SIMPLECOMP2_ELEMENTS_OF_PAGE"),
+			"NAME" => GetMessage("T_SIMPLECOMP2_ELEMENTS_ON_PAGE"),
 			"TYPE" => "STRING",
 			"DEFAULT" => "10",
 		),
