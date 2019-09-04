@@ -7,12 +7,66 @@ use Bitrix\Main\Localization\Loc;
 Loc::loadMessages(__FILE__);
 //include(GetLangFileName(dirname(__FILE__)."/lang/", "/init.php"));
 
-//AddMessage2Log('var = ' . print_r($MESS, 1), "my_module_id");
 /*
 * Вопросы:
 *	- Двойные/одинарные кавычки
 *	- array() или []
 */
+
+AddEventHandler("main", "OnPageStart", "countUser");
+
+//use Bitrix\Main\Application;
+
+use Bitrix\Main\UserTable;
+use Bitrix\Main\Config\Option;
+use Bitrix\Main\Type\DateTime;
+use Bitrix\Main\Mail\Event;
+
+function countUser()
+{
+	$administrators = CUser::GetList(($by = "NAME"), ($order = "desc"), ["GROUPS_ID" => 1]);
+	while ($admin = $administrators->fetch()) {
+		$emails[] = $admin["EMAIL"];
+	}
+
+	/*$result = UserTable::getList(array(
+		'select' => array('ID','EMAIL'), // выберем идентификатор и генерируемое (expression) поле SHORT_NAME
+		'filter' => array('GROUPS_ID'=>1), // все группы, кроме основной группы администраторов,
+	));
+	while ($arResult = $result->Fetch()) {
+		$arcUser[] = $arResult["EMAIL"];
+	}*/
+
+	$counter = UserTable::GetActiveUsersCount();
+	Option::set("main", "new_user_registered", $counter + 2);
+	$time = new DateTime();
+	$time2 = new DateTime();
+	//$tm = $time2->diff($time);
+	//$tm = $time2 - $time;
+	Option::set("main", "new_user_registered_time", $time->toString());
+
+	$counterPlus = Option::get("main", "new_user_registered");
+	$timeCount = Option::get("main", "new_user_registered_time");
+	//$dateTime = new DateTime();
+	//date('Y-m-d H:i:s')
+
+	//каким образом узнать список параметров
+	Event::send([
+		"EVENT_NAME" => "NEW_USER_COUNTER",
+		"LID" => "s1",
+		"C_FIELDS" => [
+			"EMAIL_TO" => implode(",", $emails),
+			"COUNT" => $counterPlus,
+			"DAYS" => $timeCount,
+		]
+	]);
+
+
+
+	AddMessage2Log('var = ' . print_r($tm, 1), "my_module_id");
+
+}
+
 
 
 AddEventHandler("main", "OnAdminTabControlBegin", ["AdvTab", "removeAdvTab"]);
