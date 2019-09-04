@@ -8,7 +8,6 @@ class SimpleComp2 extends CBitrixComponent
 		$production = $this->getProduction();
 		$production->SetUrlTemplates($this->arParams["URL_DETAIL"]);
 		//$arResult["COUNT"] = $production->SelectedRowsCount();
-
 		//$arResult["NAV_STRING"] = $production->GetPageNavString("Ёлементы", "", true);
 
 
@@ -31,9 +30,9 @@ class SimpleComp2 extends CBitrixComponent
 
 		$rs_ObjectList = new CDBResult;
 		$rs_ObjectList->InitFromArray($items);
-		$rs_ObjectList->NavStart($this->arParams["ELEMENTS_OF_PAGE"], false);
-		$arResult["NAV_STRING"] = $rs_ObjectList->GetPageNavString("", "");
-		$arResult["PAGE_START"] = $rs_ObjectList->SelectedRowsCount() - ($rs_ObjectList->NavPageNomer - 1) * $rs_ObjectList->NavPageSize;
+		$rs_ObjectList->NavStart($this->arParams["ELEMENTS_ON_PAGE"], false);
+		$arResult["NAV_STRING"] = $rs_ObjectList->GetPageNavString("Ёлементов", "");
+		//$arResult["PAGE_START"] = $rs_ObjectList->SelectedRowsCount() - ($rs_ObjectList->NavPageNomer - 1) * $rs_ObjectList->NavPageSize;
 		while($ar_Field = $rs_ObjectList->Fetch())
 		{
 			$arResult["ITEMS"][] = $ar_Field;
