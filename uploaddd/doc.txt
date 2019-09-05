@@ -2,6 +2,23 @@
 2. создан почтовый шаблон (id=30)
 
 
+EX2-25
+1. В complexcomp.exam/.parameters.php добавлены параметры:
+    псевдонимы для param1/param2 (VARIABLE_ALIASES)
+    шаблон адреса для exampage (SEF_MODE)
+2. В complexcomp.exam/component.php
+    param1/param2 добавлены в массив $arComponentVariables
+    дефолтный шаблон адреса exam/new/#PARAM1#/?PARAM2=#PARAM2# в $arDefaultUrlTemplates404
+    код шаблона ($componentPage) если установлен PARAM1 и шаблон адреса exampage для не чпу режима
+3. В complexcomp.exam/templates/.default/sections_top.php формируем ссылку из шаблона на exampage.
+4. В complexcomp.exam/templates/.default/exampage.php выводим переменный PARAM1 и PARAM2
+
+Не чпу режим заработал без проблем. А с чпу словил глюк. Не удавалось заставить работать пока не установил каталог ЧПУ в настройках
+компонента на произвольный, а потом вернул дефолтный /ex2/complexcomponent/ ($arResult['FOLDER'] был пустой пока это не сделал). Воспроизвести не удалось.
+
+
+
+
 
 
 [ex2-81] Не срабатывало преобразование шаблона #ELEMENT_CODE#. Ковырял getlist/выборку, а в итоге коды просто не были указаны в инфоблоке.
