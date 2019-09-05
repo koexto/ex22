@@ -13,42 +13,29 @@ Loc::loadMessages(__FILE__);
 *	- array() или []
 */
 
-AddEventHandler("main", "OnPageStart", "countUser");
-
-//use Bitrix\Main\Application;
-
 use Bitrix\Main\UserTable;
 use Bitrix\Main\Config\Option;
-use Bitrix\Main\Type\DateTime;
+//use Bitrix\Main\Type\DateTime;
 use Bitrix\Main\Mail\Event;
-
-function countUser()
+function CheckUserCount()
 {
 	$administrators = CUser::GetList(($by = "NAME"), ($order = "desc"), ["GROUPS_ID" => 1]);
 	while ($admin = $administrators->fetch()) {
 		$emails[] = $admin["EMAIL"];
 	}
 
-	/*$result = UserTable::getList(array(
-		'select' => array('ID','EMAIL'), // выберем идентификатор и генерируемое (expression) поле SHORT_NAME
-		'filter' => array('GROUPS_ID'=>1), // все группы, кроме основной группы администраторов,
-	));
-	while ($arResult = $result->Fetch()) {
-		$arcUser[] = $arResult["EMAIL"];
-	}*/
-
 	$counter = UserTable::GetActiveUsersCount();
-	Option::set("main", "new_user_registered", $counter + 2);
-	$time = new DateTime();
-	$time2 = new DateTime();
-	//$tm = $time2->diff($time);
-	//$tm = $time2 - $time;
-	Option::set("main", "new_user_registered_time", $time->toString());
+	$counterPrev = Option::get("main", "new_user_registered");
+	$newUsers = $counter - $counterPrev;
+	Option::set("main", "new_user_registered", $counter);
 
-	$counterPlus = Option::get("main", "new_user_registered");
-	$timeCount = Option::get("main", "new_user_registered_time");
-	//$dateTime = new DateTime();
-	//date('Y-m-d H:i:s')
+	$time = new DateTime();
+	$timePrev = Option::get("main", "new_user_registered_time");
+	$timePrev = new DateTime($timePrev);
+	$interval = $time->diff($timePrev)->format("%a");
+	Option::set("main", "new_user_registered_time", $time->format("d.m.Y H:i:s"));
+
+	AddMessage2Log('var = ' . print_r($timePrev, 1), "my_module_id");
 
 	//каким образом узнать список параметров
 	Event::send([
@@ -56,15 +43,12 @@ function countUser()
 		"LID" => "s1",
 		"C_FIELDS" => [
 			"EMAIL_TO" => implode(",", $emails),
-			"COUNT" => $counterPlus,
-			"DAYS" => $timeCount,
+			"COUNT" => $newUsers,
+			"DAYS" => $interval,
 		]
 	]);
 
-
-
-	AddMessage2Log('var = ' . print_r($tm, 1), "my_module_id");
-
+	return "CheckUserCount();";
 }
 
 
