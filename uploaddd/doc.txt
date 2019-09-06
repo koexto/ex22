@@ -1,19 +1,10 @@
 1. добавлен тип почтового события NEW_USER_COUNTER
 2. создан почтовый шаблон (id=30)
 
-
-ex2-102
-
-1. Создан раздел ex2/site и добавлен в левое и главное меню.
-2. В разделе ex2/site создан сайт с языком и региональными настройками En и шаблоном ex2_multilang_template_materials.
-3. Установлен заголовок главной страницы: Furniture company.
-4. Создана страница about.php (из материалов к заданию) и добавлена в главное меню.
-5. В header.php шаблона ex2_multilang_template_materials добавлена включаемая область со слоганом из файла ex2\site2\include\motto.php.
-6. Создан общий шаблон компонента main.site.selector local/templates/.default/components/bitrix/main.site.selector/dropdown/template.php
-7. В header.php обоих шаблонов сайтов (ex2_multilang_template_materials, furniture_blue) добавлен компонент main.site.selector
-8. Для инфоблока "Новости" добавлены свойства: ENG_NAME, ENG_PREVIEW. Форма редактирования перенастроена. Свойства заполнены.
-9. На главную добавлен и настроен компонент news.list
-10. Добавлен и изменен шаблон компонента news.list: local/templates/ex2_multilang_template_materials/components/bitrix/news.list/.default/template.php
+[ex2-104]
+- Изменен style.css div.news-detail h3 {display: inline-block;}
+- Создан инфоблок "Жалобы на новости" со свойствами: Пользователь, Новости.
+- Настроено отображение формы редактирования эелемента и списка элементов инфоблока "Жалобы на новости"
 
 
 
@@ -25,11 +16,13 @@ ex2-102
 	
 
 Доработки:
-!!!!!!!!!! разобраться с агентами.
+0. !!!!!!!!!! разобраться с агентами.
+5. !!!!!!!!!!!!!!Вренуть включаемую область "новости", а для макс/мин цены добавить новую.
 1. local/components/manao/simplecomp2.exam убрать из кеша данные для редактирования/добалвения/удаления элементов если не включен режим кеширования.
 2. Обработка ошибок. showmessage?
 3. init.php оптимизировать
 4. Кнопка добавить элемент не для каждого элемента, а только на весь компонент. Посмотреть для примера news.list
+
 
 	catalog_exam/#SECTION_ID#/#ELEMENT_CODE#
 
@@ -53,6 +46,18 @@ ex2-102
 Ремарка: Не чпу режим заработал без проблем. А с чпу словил глюк. Не удавалось заставить работать пока не установил каталог ЧПУ в настройках
          компонента на произвольный, а потом вернул дефолтный /ex2/complexcomponent/ ($arResult['FOLDER'] был пустой пока это не сделал). Воспроизвести не удалось.
 
+
+[ex2-102]
+1. Создан раздел ex2/site и добавлен в левое и главное меню.
+2. В разделе ex2/site создан сайт с языком и региональными настройками En и шаблоном ex2_multilang_template_materials.
+3. Установлен заголовок главной страницы: Furniture company.
+4. Создана страница about.php (из материалов к заданию) и добавлена в главное меню.
+5. В header.php шаблона ex2_multilang_template_materials добавлена включаемая область со слоганом из файла ex2\site2\include\motto.php.
+6. Создан общий шаблон компонента main.site.selector local/templates/.default/components/bitrix/main.site.selector/dropdown/template.php
+7. В header.php обоих шаблонов сайтов (ex2_multilang_template_materials, furniture_blue) добавлен компонент main.site.selector
+8. Для инфоблока "Новости" добавлены свойства: ENG_NAME, ENG_PREVIEW. Форма редактирования перенастроена. Свойства заполнены.
+9. На главную добавлен и настроен компонент news.list
+10. Добавлен и изменен шаблон компонента news.list: local/templates/ex2_multilang_template_materials/components/bitrix/news.list/.default/template.php
 
 
 [ex2-81] Не срабатывало преобразование шаблона #ELEMENT_CODE#. Ковырял getlist/выборку, а в итоге коды просто не были указаны в инфоблоке.

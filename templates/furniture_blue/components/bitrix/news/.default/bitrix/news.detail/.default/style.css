@@ -7,3 +7,8 @@ div.news-detail img.detail_picture
 {
 	color:#486DAA;
 }
+div.news-detail h3
+{
+	display: inline-block;
+}
+

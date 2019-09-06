@@ -27,5 +27,10 @@ $arTemplateParameters = array(
 		"TYPE" => "STRING",
 		"DEFAULT" => "",
 	),
+	"COMPLAINT_AJAX" => Array(
+		"NAME" => GetMessage("T_IBLOCK_DESC_COMPLAINT_AJAX"),
+		"TYPE" => "STRING",
+		"DEFAULT" => "N",
+	),
 );
 ?>

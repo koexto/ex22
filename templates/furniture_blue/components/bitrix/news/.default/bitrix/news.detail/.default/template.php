@@ -1,4 +1,9 @@
-<?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
+<?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
+//echo "<pre>". print_r($arResult, 1) ."</pre>";
+$templateFolder = $this->GetFolder();
+$this->addExternalJs($templateFolder . "/main.js");
+//<script type="text/javascript" src="<?=$templateFolder.'/main.js'?>"></script>
+?>
 <div class="news-detail">
 	<?if($arParams["DISPLAY_PICTURE"]!="N" && is_array($arResult["DETAIL_PICTURE"])):?>
 		<img class="detail_picture" border="0" src="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>" width="<?=$arResult["DETAIL_PICTURE"]["WIDTH"]?>" height="<?=$arResult["DETAIL_PICTURE"]["HEIGHT"]?>" alt="<?=$arResult["NAME"]?>"  title="<?=$arResult["NAME"]?>" />
@@ -8,6 +13,7 @@
 	<?endif;?>
 	<?if($arParams["DISPLAY_NAME"]!="N" && $arResult["NAME"]):?>
 		<h3><?=$arResult["NAME"]?></h3>
+        <small id="complaint"><a href="?j=y">пожаловаться</a> <? $APPLICATION->ShowViewContent('complaint'); ?></small>
 	<?endif;?>
 	<div class="news-detail">
 	<?if($arParams["DISPLAY_PREVIEW_TEXT"]!="N" && $arResult["FIELDS"]["PREVIEW_TEXT"]):?>
