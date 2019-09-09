@@ -1,8 +1,10 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 //echo "<pre>". print_r($arResult, 1) ."</pre>";
-$templateFolder = $this->GetFolder();
-$this->addExternalJs($templateFolder . "/main.js");
-//<script type="text/javascript" src="<?=$templateFolder.'/main.js'?>"></script>
+if($arParams["COMPLAINT_AJAX"] == "Y")
+{
+	$templateFolder = $this->GetFolder();
+	$this->addExternalJs($templateFolder . "/complaint.js");
+}
 ?>
 <div class="news-detail">
 	<?if($arParams["DISPLAY_PICTURE"]!="N" && is_array($arResult["DETAIL_PICTURE"])):?>
@@ -13,7 +15,13 @@ $this->addExternalJs($templateFolder . "/main.js");
 	<?endif;?>
 	<?if($arParams["DISPLAY_NAME"]!="N" && $arResult["NAME"]):?>
 		<h3><?=$arResult["NAME"]?></h3>
-        <small id="complaint"><a href="?j=y">пожаловаться</a> <? $APPLICATION->ShowViewContent('complaint'); ?></small>
+        <small id="complaint">
+        <?if($arParams["COMPLAINT_AJAX"] == "Y"):?>
+            <a id="linkComplaint" href=""><?=GetMessage("T_IBLOCK_COMPLAINT")?></a>
+        <?else:?>
+            <a href="?plaint=y"><?=GetMessage("T_IBLOCK_COMPLAINT")?></a>
+        <?endif;?>
+        </small>
 	<?endif;?>
 	<div class="news-detail">
 	<?if($arParams["DISPLAY_PREVIEW_TEXT"]!="N" && $arResult["FIELDS"]["PREVIEW_TEXT"]):?>

@@ -27,6 +27,11 @@ $arTemplateParameters = array(
 		"VALUES" => $arIblockType,
 		"REFRESH" => "Y",
 	),
+	"COMPLAINT_AJAX" => Array(
+		"NAME" => GetMessage("T_IBLOCK_DESC_COMPLAINT_AJAX"),
+		"TYPE" => "STRING",
+		"DEFAULT" => "N",
+	),
 );
 
 if ($arCurrentValues['TYPE_IBLOCK_FOR_CANONICAL'] != "")

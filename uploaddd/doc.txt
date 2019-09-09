@@ -2,18 +2,21 @@
 2. создан почтовый шаблон (id=30)
 
 [ex2-104]
-- Изменен style.css div.news-detail h3 {display: inline-block;}
+- Изменен local/templates/furniture_blue/components/bitrix/news/.default/bitrix/news.detail/.default/style.css div.news-detail h3 {display: inline-block;}
 - Создан инфоблок "Жалобы на новости" со свойствами: Пользователь, Новости.
 - Настроено отображение формы редактирования эелемента и списка элементов инфоблока "Жалобы на новости"
-
+- Добавлен параметр COMPLAINT_AJAX (собирать жалобы в режиме AJAX) в local/templates/furniture_blue/components/bitrix/news/.default/.parameters.php и lang-фразы.
+- В шаблон детального просмотра новости local/templates/furniture_blue/components/bitrix/news/.default/bitrix/news.detail/.default/template.php добавлена ссылка "Пожаловаться"
+- Создан local/templates/furniture_blue/components/bitrix/news/.default/bitrix/news.detail/.default/complaint.js подключаемый в шаблон в ajax режиме жалоб
+- В component_epilog.php (local/templates/furniture_blue/components/bitrix/news/.default/bitrix/news.detail/.default/component_epilog.php) создан механизм добавления элементов в инфоблок "Жалобы на новости" в обычном и ajax режимах.
 
 
 
 Вопросы:
-	- скобки
-	- массивы
+	- Двойные/одинарные кавычки
+	- массивы array() или []
 	- нужно ли рассчитывать компонент на работу с обоими версиями инфоблоков (в случае множественных списков)
-	
+
 
 Доработки:
 0. !!!!!!!!!! разобраться с агентами.

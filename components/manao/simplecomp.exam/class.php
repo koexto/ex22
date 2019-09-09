@@ -17,22 +17,27 @@ class SimpleComp extends CBitrixComponent
 			$arResult["NEWS"][$elementNews["ID"]] = ["NAME" => $elementNews["NAME"], "ACTIVE_FROM" => $elementNews["ACTIVE_FROM"]];
 		}
 
+		//echo "<pre>". print_r($arResult, 1) ."</pre>";
+
+
 		$arFilterSection = array(
-			'IBLOCK_ID' => $arParams["ID_IBLOCK_PRODUCTION"],
-			'ACTIVE' => 'Y',
+			"IBLOCK_ID" => $arParams["ID_IBLOCK_PRODUCTION"],
+			"ACTIVE" => "Y",
 		);
-		$arSelectSection = array("ID", "NAME", "IBLOCK_ID", "UF_NEWS_LINK");
+		$arSelectSection = array("ID", "NAME", "IBLOCK_ID", $arParams["ID_PROPERTY_PRODUCTION"]);
 		$sections = CIBlockSection::GetList(array(), $arFilterSection, false, $arSelectSection);
 
 		while ($section = $sections->fetch())
 		{	
-			foreach ($section["UF_NEWS_LINK"] as $value) {
+			foreach ($section[$arParams["ID_PROPERTY_PRODUCTION"]] as $value) {
 				$arResult["NEWS"][$value]["SECTION_IDS"][] = $section["ID"];
 
 				$arResult["SECTION"][$value][$section["ID"]]=$section;
 				$arResult["SECTION_NAMES"][$value][] = $section["NAME"];
 			}
 		}
+
+		//echo "<pre>". print_r($arResult, 1) ."</pre>";
 
 		$arFilter = array(
 			'IBLOCK_ID' => $arParams["ID_IBLOCK_PRODUCTION"],
@@ -51,6 +56,8 @@ class SimpleComp extends CBitrixComponent
 				"MATERIAL" => $element["PROPERTY_MATERIAL_VALUE"],
 			];
 		}
+
+		//echo "<pre>". print_r($arResult, 1) ."</pre>";
 		return $arResult;
 	}
 }

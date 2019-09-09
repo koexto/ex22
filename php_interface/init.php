@@ -7,12 +7,6 @@ use Bitrix\Main\Localization\Loc;
 Loc::loadMessages(__FILE__);
 //include(GetLangFileName(dirname(__FILE__)."/lang/", "/init.php"));
 
-/*
-* Вопросы:
-*	- Двойные/одинарные кавычки
-*	- array() или []
-*/
-
 use Bitrix\Main\UserTable;
 use Bitrix\Main\Config\Option;
 //use Bitrix\Main\Type\DateTime;

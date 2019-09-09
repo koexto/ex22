@@ -7,9 +7,6 @@ if ($this->StartResultCache())
 {
 	$arResult = $this->getResult();
 
-	if (empty($arResult))
-		$this->AbortResultCache();
-
 	$this->IncludeComponentTemplate();
 }
 

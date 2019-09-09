@@ -4,11 +4,10 @@
 use Bitrix\Main\Application;
 use Bitrix\Main\Type\DateTime;
 $request = Application::getInstance()->getContext()->getRequest();
-$complaint = $request->getQuery('j');
+$complaint = $request->getQuery('plaint');
 
 if ($complaint == "y")
 {
-	//var_dump($USER->GetID());
 	if ($USER->IsAuthorized())
 		$userString = $USER->GetID() . ',' . $USER->GetLogin() . ',' . $USER->GetFullName();
 	else
@@ -28,22 +27,24 @@ if ($complaint == "y")
 	];
 
 	$element = new CIBlockElement;
-	$element->add($arLoad);
 	if ($productId = $element->add($arLoad))
 	{
-		ob_start();
-		echo "Ваше мнение учтено, №{$productId}";
-		$APPLICATION->AddViewContent('complaint', ob_get_clean());
+		if ($request->isAjaxRequest())
+		{
+			$APPLICATION->RestartBuffer();
+			echo json_encode(["id" => $productId]);
+			die();
+		}
 
-		//для шаблона
-		//$this->__template->SetViewTarget("complaint");
-		//что-то там
-		//$this->__template->EndViewTarget();
+		?>
+        <script>
+            products = BX('complaint');
+            products.append("Ваше мнение учтено, №<?=$productId?>");
+        </script>
+		<?
 	}
 
 }
-
-
 
 if (isset($arResult["CANONICAL_URL"]))
 	$APPLICATION->SetPageProperty("canonical", $arResult["CANONICAL_URL"]);
