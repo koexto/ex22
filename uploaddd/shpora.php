@@ -76,3 +76,14 @@ $APPLICATION->AddViewContent('complaint', ob_get_clean());
 $this->SetViewTarget("complaint");
 echo "Ваше мнение учтено, №{$productId}";
 $this->EndViewTarget();
+
+
+// логирование/отладка
+define("LOG_FILENAME", $_SERVER["DOCUMENT_ROOT"]."/log.txt");
+AddMessage2Log('var = ' . print_r($var, 1), "my_module_id");
+
+//старое ядро
+//global $APPLICATION;
+//$url = $APPLICATION->GetCurUri();
+//новое
+//$url = Application::getInstance()->getContext()->getRequest()->getDecodedUri();
