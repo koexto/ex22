@@ -87,3 +87,22 @@ AddMessage2Log('var = ' . print_r($var, 1), "my_module_id");
 //$url = $APPLICATION->GetCurUri();
 //новое
 //$url = Application::getInstance()->getContext()->getRequest()->getDecodedUri();
+
+
+
+GetPropertyValuesArray
+//замена коду не удачному коду вида
+$iterator = CIBlockElement::GetList();
+while ($obj = $iterator->GetNextElement())
+{
+	$properties = $obj->GetProperties();
+}
+
+//для определения адреса сайта IsHTTPS
+global $APPLICATION;
+// получим полный URI текущий страницы
+$CURRENT_PAGE = (CMain::IsHTTPS()) ? "https://" : "http://";
+$CURRENT_PAGE .= $_SERVER["HTTP_HOST"];
+$CURRENT_PAGE .= $APPLICATION->GetCurUri();
+// в переменной $CURRENT_PAGE значение будет например,
+// "http://www.mysite.ru/ru/index.php?id=23"

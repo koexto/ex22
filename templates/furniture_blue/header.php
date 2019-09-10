@@ -124,6 +124,18 @@ $APPLICATION->IncludeFile(
 					</div>
 				</div>
 
+						<?$APPLICATION->IncludeComponent(
+							"bitrix:main.include",
+							"",
+							Array(
+								"AREA_FILE_RECURSIVE" => "Y",
+								"AREA_FILE_SHOW" => "page",
+								"AREA_FILE_SUFFIX" => "inc_minmax",
+								"EDIT_TEMPLATE" => ""
+							)
+						);?>
+
+
                 <div class="content-block">
                     <div class="content-block-inner">
                         <h3><?=GetMessage('CFT_LANG_CANGE')?></h3>
